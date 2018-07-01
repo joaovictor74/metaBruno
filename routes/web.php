@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('authors','AuthorController');
-Route::get('aluno',['uses'=> 'Controller@loginAluno']);
-Route::post('aluno',['as'=>'uses.login_Aluno','use'=> 'Controller@login_Aluno']);
-Route::get('admin',['uses'=> 'Controller@loginAdmin']);
-Route::get('professor',['uses'=> 'Controller@loginProfessor']);
+Route::get('/aluno',['uses'=> 'Controller@loginAluno']);
+Route::post('/aluno',['as'=>'user.login_Aluno','uses'=> 'DashboardController@auth']);
+Route::get('/dashboard',['as'=>'user.dashboard','uses'=> 'DashboardController@index']);

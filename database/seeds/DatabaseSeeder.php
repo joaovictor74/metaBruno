@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Entities\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -10,12 +11,10 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        echo "Creating 10 authors...\n";
-        factory(App\Author::class,10)->create();
-        echo "Creating 36 posts...\n";
-        factory(App\Post::class,36)->create();
-        echo "Creating 67 comments...\n";
-        factory(App\Comment::class,67)->create();
-    }
+    {     
+            User::create(     [
+            'name' =>'leibe',
+            'email' =>'leibe@beibe.com',
+            'password' =>bcrypt('123')]);
+        }
 }

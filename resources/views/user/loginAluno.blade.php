@@ -11,7 +11,7 @@
         <section id="conteudo-view" class="Login">
             <h1>Login do Aluno</h1>
             
-            {!! Form::open(["route"=>'uses.login_Aluno','method'=>'post']) !!}
+            {!! Form::open(["route"=>'user.login_Aluno','method'=>'post']) !!}
                 <p></p>
 
                 <label>

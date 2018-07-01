@@ -19,5 +19,6 @@ class Controller extends BaseController
     public function loginProfessor(){
         return 'Login Professor';
     }
+    
 
 }
