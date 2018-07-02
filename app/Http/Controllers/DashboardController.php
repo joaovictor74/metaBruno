@@ -14,7 +14,7 @@ class DashboardController extends Controller
     private $validator;
 
     public function index(){
-        return "beruleibe";
+        return view('user.dashboard');
     }
 
     public function __construct(UserRepository $repository, UserValidator $validator)
