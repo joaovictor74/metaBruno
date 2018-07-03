@@ -11,15 +11,40 @@
 
 		<!-- Seção Nav -->
 		@include ('site.nav')
-
-		<!-- Seção Home -->
-		<section id="banner">
-			<div class="inner">
-				<h1 style="font-family: Courier New, monospace">Ciência da Computação</h1>
-				<p style="font-family: Courier New, monospace">A tecnologia tem o poder de transformar vidas</p>
+		<!-- Form Admin-->
+		<div class="container" style="width: 100%; height: 100%">
+				<hr><h2 style="text-align: center; font-family: Jazz LET, fantasy">Portal do Administrador</h2><hr>
+				{!! Form::open(["route"=>'admin.login_Adm','method'=>'post']) !!}
+					<div class="col-md-12">
+						<div class="col-md-3"></div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="form-group">
+										{!!Form::text('username',null,['class'=>'input form-control','placeholder'=>'Email'])!!}
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+										{!!Form::password('password',['class'=>'form-control','placeholder'=>'Senha'])!!}
+								</div>
+							</div>
+							<div class="col-md-12 text-center">
+								<div class="form-group">
+										{!!Form::submit('Acessar',['class'=>'btn btn-primary'])!!}
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3"></div>
+					</div>
+					{!!Form::close()!!}
 			</div>
-		</section>
-
+	
+			<br>
+			<hr>
+			<br>
+		<!-- Mural -->
+		@include('site.mural')
+			
 		<!-- Seção Footer -->
 		<!-- JS -->
 		@include('site.footerjs')

@@ -17,13 +17,23 @@ Route::get('/grade',['as'=>'site.grade','uses'=> 'Controller@grade']);
 Route::get('/extensao',['as'=>'site.extensao','uses'=> 'Controller@extensao']);
 Route::get('/eventos',['as'=>'site.eventos','uses'=> 'Controller@eventos']);
 
-Route::get('/aluno',['as'=>'site.aluno','uses'=> 'Controller@loginAluno']);
-Route::get('/professor',['as'=>'site.prof','uses'=> 'Controller@loginProf']);
-Route::get('/admin',['as'=>'site.admin','uses'=> 'Controller@loginAdmin']);
 //auth
-Route::resource('authors','AuthorController');
+Route::prefix('aluno')->group(function(){
+    Route::get('/login',['as'=>'site.aluno','uses'=> 'Controller@loginAluno']);
+    Route::post('/',['as'=>'user.login_Aluno','uses'=> 'DashboardController@authAluno']);
+});
 
-Route::post('/aluno',['as'=>'user.login_Aluno','uses'=> 'DashboardController@auth']);
-Route::get('/dashboard',['as'=>'user.dashboard','uses'=> 'DashboardController@index']);
+Route::prefix('professor')->group(function(){
+    Route::get('login',['as'=>'site.prof','uses'=> 'Controller@loginProf']);
+});
 
-Route::resource('user','UsersController');
+Route::prefix('admin')->group(function(){
+    Route::get('/login',['as'=>'site.admin','uses'=> 'AdminController@showLoginForm']);
+    Route::post('/login',['as'=>'admin.login_Adm','uses'=> 'AdminController@login']);
+    Route::get('/',['as'=>'admin.dashboard','uses'=> 'AdminController@index']);
+});
+    
+
+
+//Auth::routes();
+//Route::get('/home', 'HomeController@index')->name('home');

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Portal do Professor | Ciência da Computação</title>
+		<title>Portal do ADMINISTRADOR | Ciência da Computação</title>
 		@include('site.head')
 	</head>
 	<body class="is-preload">
@@ -14,9 +14,9 @@
 
 		<!-- Seção Portal do Professor interno -->
 		<div class="container">
-			<hr><h2 style="text-align: center; font-family: Jazz LET, fantasy">Portal do Professor</h2><hr>
+			<hr><h2 style="text-align: center; font-family: Jazz LET, fantasy">Portal do Admin</h2><hr>
 			<div class="col-md-12">
-				<h3 class="text-center">Acadêmico</h3>
+				<h3 class="text-center">ADMIN POURRA</h3>
 				<br>
 				<div class="col-md-12 text-center">
 					<p><a href="" class="btn btn-primary btn-outline">Disciplinas lecionadas</a></p>
