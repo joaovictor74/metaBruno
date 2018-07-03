@@ -15,7 +15,7 @@
             <dl class="links" >
                 <dd><a href="{{route('site.aluno')}}" style="color:aliceblue">Aluno</a></dd>
                 <dd><a href="{{route('site.prof')}}" style="color:aliceblue">Professor</a></dd>
-                <dd><a href="{{route('site.admin')}}" style="color:aliceblue">Administrativo</a></dd>
+                <dd><a href="{{route('admin.login')}}" style="color:aliceblue">Administrativo</a></dd>
             </dl>
         </li>
         <li><a href="http://sistemas.facape.br:8080/vestibular/home.do" target="_blank">Vestibular</a></li>

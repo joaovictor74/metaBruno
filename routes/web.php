@@ -28,7 +28,7 @@ Route::prefix('professor')->group(function(){
 });
 
 Route::prefix('admin')->group(function(){
-    Route::get('/login',['as'=>'site.admin','uses'=> 'AdminController@showLoginForm']);
+    Route::get('/login',['as'=>'admin.login','uses'=> 'AdminController@showLoginForm']);
     Route::post('/login',['as'=>'admin.login_Adm','uses'=> 'AdminController@login']);
     Route::get('/',['as'=>'admin.dashboard','uses'=> 'AdminController@index']);
 });

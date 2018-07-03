@@ -7,37 +7,38 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\UserCreateRequest;
-use App\Http\Requests\UserUpdateRequest;
-use App\Repositories\UserRepository;
-use App\Validators\UserValidator;
-use App\Services\UserService;
+use App\Http\Requests\AdminCreateRequest;
+use App\Http\Requests\AdminUpdateRequest;
+use App\Repositories\AdminRepository;
+use App\Validators\AdminValidator;
 
 /**
- * Class UsersController.
+ * Class AdminsController.
  *
  * @package namespace App\Http\Controllers;
  */
-class UsersController extends Controller
+class AdminsController extends Controller
 {
     /**
-     * @var UserRepository
+     * @var AdminRepository
      */
     protected $repository;
 
-    
-    protected $service;
+    /**
+     * @var AdminValidator
+     */
+    protected $validator;
 
     /**
-     * UsersController constructor.
+     * AdminsController constructor.
      *
-     * @param UserRepository $repository
-     * @param UserValidator $validator
+     * @param AdminRepository $repository
+     * @param AdminValidator $validator
      */
-    public function __construct(UserRepository $repository, UserService $service)
+    public function __construct(AdminRepository $repository, AdminValidator $validator)
     {
         $this->repository = $repository;
-        $this->service    = $service;
+        $this->validator  = $validator;
     }
 
     /**
@@ -47,31 +48,57 @@ class UsersController extends Controller
      */
     public function index()
     {
-            return view('user.index');
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        $admins = $this->repository->all();
+
+        if (request()->wantsJson()) {
+
+            return response()->json([
+                'data' => $admins,
+            ]);
+        }
+
+        return view('admins.index', compact('admins'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  UserCreateRequest $request
+     * @param  AdminCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(UserCreateRequest $request)
+    public function store(AdminCreateRequest $request)
     {
-        $request = $this->service->store($request->all());
-        $usuario = $request['success'] ? $request['data']:null;
-        
-        session()->flush('success',[
-            'success' => $request['success'],
-            'message'=> $request['message'],
-        ]);
+        try {
 
-        return view('user.index',[
-            'usuario'=>$usuario,
-        ]);
+            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
+
+            $admin = $this->repository->create($request->all());
+
+            $response = [
+                'message' => 'Admin created.',
+                'data'    => $admin->toArray(),
+            ];
+
+            if ($request->wantsJson()) {
+
+                return response()->json($response);
+            }
+
+            return redirect()->back()->with('message', $response['message']);
+        } catch (ValidatorException $e) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'error'   => true,
+                    'message' => $e->getMessageBag()
+                ]);
+            }
+
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+        }
     }
 
     /**
@@ -83,16 +110,16 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = $this->repository->find($id);
+        $admin = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $user,
+                'data' => $admin,
             ]);
         }
 
-        return view('users.show', compact('user'));
+        return view('admins.show', compact('admin'));
     }
 
     /**
@@ -104,32 +131,32 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->repository->find($id);
+        $admin = $this->repository->find($id);
 
-        return view('users.edit', compact('user'));
+        return view('admins.edit', compact('admin'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  UserUpdateRequest $request
+     * @param  AdminUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(AdminUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $user = $this->repository->update($request->all(), $id);
+            $admin = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'User updated.',
-                'data'    => $user->toArray(),
+                'message' => 'Admin updated.',
+                'data'    => $admin->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -167,11 +194,11 @@ class UsersController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'User deleted.',
+                'message' => 'Admin deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'User deleted.');
+        return redirect()->back()->with('message', 'Admin deleted.');
     }
 }

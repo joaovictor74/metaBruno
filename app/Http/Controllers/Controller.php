@@ -31,17 +31,7 @@ class Controller extends BaseController
         return view('site.eventos');
     }    
 
-    public function loginAluno(){
-        return view('site.aluno');
-    }
-   
-    public function loginProf(){
-        return view('site.prof');
-    }
     
-    public function loginAdmin(){
-        return view('site.admin');
-    }
     
 
 }
