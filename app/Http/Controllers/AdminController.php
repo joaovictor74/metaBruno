@@ -20,10 +20,10 @@ class AdminController extends Controller
     public function __construct(AdminRepository $repository, AdminValidator $validator){
         $this->repository = $repository;
         $this->validator  = $validator;
-        $this->middleware('auth');
+        $this->middleware('guest');
     }
     public function showLoginForm(){
-        $this->middleware('guest');
+        
         return view('site.admin');
     }
     
@@ -52,7 +52,7 @@ class AdminController extends Controller
 
     }
     public function index(){
-        $this->middleware('auth:admin');        
+               
         return view('site.admin-in');
     }
        

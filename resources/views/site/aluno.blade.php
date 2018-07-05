@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Portal do Aluno | Ciência da Computação</title>
@@ -15,7 +15,7 @@
 		<!-- Seção Form do Portal do Aluno -->
 		<div class="container" style="width: 100%; height: 100%">
 			<hr><h2 style="text-align: center; font-family: Jazz LET, fantasy">Portal do Aluno</h2><hr>
-			{!! Form::open(["route"=>'user.login_Aluno','method'=>'post']) !!}
+			{!! Form::open(["route"=>'aluno.login','method'=>'post']) !!}
 				<div class="col-md-12">
 					<div class="col-md-3"></div>
 					<div class="col-md-6">

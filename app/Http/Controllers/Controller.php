@@ -30,7 +30,10 @@ class Controller extends BaseController
     public function eventos(){
         return view('site.eventos');
     }    
-
+    
+    public function loginAluno(){
+        return view('site.aluno');
+    }
     
     
 

@@ -21,7 +21,7 @@ class DashboardController extends Controller
     {
         $this->repository = $repository;
         $this->validator  = $validator;
-        $this->middleware('auth');
+        $this->middleware('autorizador:aluno');
        
     }
 
@@ -36,9 +36,9 @@ class DashboardController extends Controller
         
             try{
                 if(Auth::attempt($data,false))
-                    return redirect()->intended(route('site.aluno-in'));
+                    return redirect()->view('site.aluno-in');
                 else
-                    return redirect()->back()->withInput();
+                    return redirect()->intendend(route('aluno.login')->withInput());
             }
             catch(Exception $e){
                 switch(get_class($e)){
@@ -49,9 +49,8 @@ class DashboardController extends Controller
                 }
             }    
         }
-       
-        
-
+        public function index(){
+            return view('site.aluno-in');        } 
     }
     
 

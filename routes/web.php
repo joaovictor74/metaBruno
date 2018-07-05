@@ -19,8 +19,9 @@ Route::get('/eventos',['as'=>'site.eventos','uses'=> 'Controller@eventos']);
 
 //auth
 Route::prefix('aluno')->group(function(){
-    Route::get('/login',['as'=>'site.aluno','uses'=> 'Controller@loginAluno']);
-    Route::post('/',['as'=>'user.login_Aluno','uses'=> 'DashboardController@authAluno']);
+    Route::get('/login',['as'=>'aluno.login','uses'=> 'Controller@loginAluno']);
+    Route::post('/login',['as'=>'aluno.login','uses'=> 'DashboardController@authAluno']);
+    Route::get('/',['as'=>'site.aluno-in','uses'=> 'DashboardController@index']);
 });
 
 Route::prefix('professor')->group(function(){
@@ -32,8 +33,8 @@ Route::prefix('admin')->group(function(){
     Route::post('/login',['as'=>'admin.login_Adm','uses'=> 'AdminController@login']);
     Route::get('/',['as'=>'admin.dashboard','uses'=> 'AdminController@index']);
 });
-    
-
+ 
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 //Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');

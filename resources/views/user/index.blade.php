@@ -7,9 +7,9 @@
 @endsection
 
 @section('conteudo-view')
-    @if(session('success'))
-        <h3>{{session('success')['message']}}</h3>
-    @endif
+    <?php //@if(session('success'))
+        //<h3>{{session('success')['message']}}</h3>
+    //@endif?>
     <h1 id= "tituloaluno" >Cadastro de Aluno</h1>
     {!!Form::open (['route'=>'user.store','method'=> 'post','class' => 'form-padrao'])!!}
         @include('templates.formulario.input',['label'=>'Matricula','input' => 'matricula','attributes' => ['placeholder'=>'Matricula']])

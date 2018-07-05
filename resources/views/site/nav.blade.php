@@ -13,7 +13,7 @@
         </li>
         <li><a>Portais</a>
             <dl class="links" >
-                <dd><a href="{{route('site.aluno')}}" style="color:aliceblue">Aluno</a></dd>
+                <dd><a href="{{route('aluno.login')}}" style="color:aliceblue">Aluno</a></dd>
                 <dd><a href="{{route('site.prof')}}" style="color:aliceblue">Professor</a></dd>
                 <dd><a href="{{route('admin.login')}}" style="color:aliceblue">Administrativo</a></dd>
             </dl>

@@ -53,6 +53,14 @@ return [
             'driver' => 'token',
             'provider' => 'admins',
         ],
+        'aluno' => [
+            'driver' => 'session',
+            'provider' => 'alunos',
+        ],
+        'aluno-api' => [
+            'driver' => 'token',
+            'provider' => 'alunos',
+        ],
 
     ],
 
@@ -82,7 +90,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Entities\Admin::class,
         ],
-
+        'alunos' => [
+            'driver' => 'eloquent',
+            'model' => App\Entities\User::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -112,6 +123,11 @@ return [
         ],
         'admins' => [
             'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'aluno' => [
+            'provider' => 'aluno',
             'table' => 'password_resets',
             'expire' => 60,
         ],
